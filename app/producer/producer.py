@@ -12,8 +12,7 @@ context = ssl.create_default_context()
 
 producer = KafkaProducer(
     bootstrap_servers=kafka_broker.split(","),
-    security_protocol="SSL",
-    ssl_context=context,
+    security_protocol="SSL",   # 👈 REQUIRED
     value_serializer=lambda v: json.dumps(v).encode("utf-8")
 )
 

@@ -3,12 +3,15 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = var.cluster_name
-  cluster_version = "1.28"
+  cluster_version = "1.30"
+
+  enable_cluster_creator_admin_permissions = true
+
+  cluster_endpoint_public_access  = true
+  cluster_endpoint_private_access = true
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
-
-  enable_irsa = true
 
   eks_managed_node_groups = {
     default = {
@@ -17,7 +20,7 @@ module "eks" {
       min_size     = 1
 
       instance_types = ["t3.small"]
-      ami_type = "AL2_x86_64"
+      ami_type       = "AL2_x86_64"
     }
   }
 }
