@@ -9,6 +9,7 @@ consumer = KafkaConsumer(
     kafka_topic,
     bootstrap_servers=kafka_broker.split(","),
     security_protocol="SSL",
+    group_id="my-consumer-group",   # 👈 IMPORTANT
     auto_offset_reset="earliest",
     value_deserializer=lambda m: json.loads(m.decode("utf-8")),
 )
