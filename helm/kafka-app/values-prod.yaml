@@ -1,0 +1,11 @@
+producer:
+  replicas: 2
+  image: 844331382461.dkr.ecr.us-east-2.amazonaws.com/producer:latest
+
+consumer:
+  replicas: 3
+  image: 844331382461.dkr.ecr.us-east-2.amazonaws.com/consumer:latest
+
+kafka:
+  broker: "b-1.mskkafka.nybnzy.c4.kafka.us-east-2.amazonaws.com:9094,b-2.mskkafka.nybnzy.c4.kafka.us-east-2.amazonaws.com:9094"
+  topic: "posts"
