@@ -1,0 +1,24 @@
+cat <<EOF > helm/kafka-app/templates/consumer.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  replicas: {{ .Values.consumer.replicas }}
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: {{ .Values.consumer.image }}
+        env:
+        - name: KAFKA_BROKER_URL
+          value: "{{ .Values.kafka.broker }}"
+        - name: KAFKA_TOPIC
+          value: "{{ .Values.kafka.topic }}"
+EOF
