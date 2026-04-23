@@ -1,8 +1,6 @@
-cat <<EOF > helm/kafka-app/Chart.yaml
 apiVersion: v2
 name: kafka-app
-description: Kafka Producer Consumer App
+description: "Kafka Producer Consumer App"
 type: application
 version: 0.1.0
 appVersion: "1.0"
-EOF
