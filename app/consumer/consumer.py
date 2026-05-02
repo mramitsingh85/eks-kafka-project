@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from kafka import KafkaConsumer
 
 kafka_broker = os.environ.get("KAFKA_BROKER_URL")
@@ -18,3 +19,7 @@ print("Listening...")
 
 for msg in consumer:
     print(f"Received message: {msg.value}")
+
+    for msg in consumer:
+    print(f"Received: {msg.value}")
+    time.sleep(2) 
