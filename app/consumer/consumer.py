@@ -4,11 +4,12 @@ import json
 import time
 
 kafka_broker = os.environ.get("KAFKA_BROKER_URL")
+bootstrap_servers = kafka_broker.split(",")
 kafka_topic = os.environ.get("KAFKA_TOPIC", "posts")
 
 consumer = KafkaConsumer(
     kafka_topic,
-    bootstrap_servers=[kafka_broker],
+    bootstrap_servers=bootstrap_servers,
     group_id="my-consumer-group-v3",  # 
     auto_offset_reset="earliest",
     value_deserializer=lambda m: json.loads(m.decode("utf-8")),

@@ -5,6 +5,7 @@ import json
 import time
 
 kafka_broker = os.environ.get("KAFKA_BROKER_URL")
+bootstrap_servers = kafka_broker.split(",")
 kafka_topic = os.environ.get("KAFKA_TOPIC", "posts")
 
 producer = KafkaProducer(
@@ -13,7 +14,7 @@ producer = KafkaProducer(
 )
 
 i = 0
-while True:  # 🔥 continuous producer
+while True:  # 
     producer.send(
         kafka_topic,
         {
