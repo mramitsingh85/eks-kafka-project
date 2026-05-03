@@ -4,13 +4,15 @@ import json
 import time
 
 kafka_broker = os.environ.get("KAFKA_BROKER_URL")
-bootstrap_servers = kafka_broker.split(",")
 kafka_topic = os.environ.get("KAFKA_TOPIC", "posts")
+
+bootstrap_servers = kafka_broker.split(",")
 
 consumer = KafkaConsumer(
     kafka_topic,
     bootstrap_servers=bootstrap_servers,
-    group_id="my-consumer-group-v3",  # 
+    group_id="my-consumer-group-v3",
+    security_protocol="SSL",
     auto_offset_reset="earliest",
     value_deserializer=lambda m: json.loads(m.decode("utf-8")),
 )
@@ -19,4 +21,4 @@ print(f"Listening for messages on topic '{kafka_topic}'...")
 
 for message in consumer:
     print(f"Received message: {message.value}")
-    time.sleep(2)  # 🔥 simulate slow processing (creates lag)
+    time.sleep(2)
